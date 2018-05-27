@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="/home/rani/Desktop/VHDL/TransmisorSerie2/test_2_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="numeric_std" />
+            <top_module name="std_logic_1164" />
+            <top_module name="std_logic_arith" />
+            <top_module name="std_logic_unsigned" />
+            <top_module name="test_2" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="18" />
+   <wvobject fp_name="/test_2/clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_2/a_reset" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">a_reset</obj_property>
+      <obj_property name="ObjectShortName">a_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_2/baud_selec_in" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">baud_selec_in[1:0]</obj_property>
+      <obj_property name="ObjectShortName">baud_selec_in[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_2/data_in" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">data_in[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_2/btn_in" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">btn_in</obj_property>
+      <obj_property name="ObjectShortName">btn_in</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_2/uut/senal_muestreo" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">senal_muestreo</obj_property>
+      <obj_property name="ObjectShortName">senal_muestreo</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_2/tx_out" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">tx_out</obj_property>
+      <obj_property name="ObjectShortName">tx_out</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_2/uut/tsr" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">tsr</obj_property>
+      <obj_property name="ObjectShortName">tsr</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_2/tx_ready" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">tx_ready</obj_property>
+      <obj_property name="ObjectShortName">tx_ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_2/uut/state_actual" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">state_actual</obj_property>
+      <obj_property name="ObjectShortName">state_actual</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_2/uut/state_siguiente" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">state_siguiente</obj_property>
+      <obj_property name="ObjectShortName">state_siguiente</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_2/uut/bit_paridad" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">bit_paridad</obj_property>
+      <obj_property name="ObjectShortName">bit_paridad</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_2/uut/shifter" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">shifter[9:0]</obj_property>
+      <obj_property name="ObjectShortName">shifter[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_2/uut/bits_send" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">bits_send[3:0]</obj_property>
+      <obj_property name="ObjectShortName">bits_send[3:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_2/uut/flag" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">flag</obj_property>
+      <obj_property name="ObjectShortName">flag</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_2/uut/count" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">count[11:0]</obj_property>
+      <obj_property name="ObjectShortName">count[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_2/uut/bauds" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">bauds[11:0]</obj_property>
+      <obj_property name="ObjectShortName">bauds[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_2/uut/aux_count" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">aux_count[11:0]</obj_property>
+      <obj_property name="ObjectShortName">aux_count[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+</wave_config>
