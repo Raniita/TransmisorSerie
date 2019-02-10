@@ -57,7 +57,8 @@ signal SENAL_MUESTREO: std_logic := '0';
 signal BIT_PARIDAD :  std_logic;
 signal TSR : std_logic;
 
-signal MENSAJE : std_logic_vector(9 downto 0);                 -- Mensaje a enviar
+--signal MENSAJE,
+signal shifter : std_logic_vector(9 downto 0);                 -- Mensaje a enviar
 
 signal count : std_logic_vector(11 downto 0);                  -- Cuenta de clk
 signal aux_count : std_logic_vector(11 downto 0);              -- Cuenta aux de clk
@@ -67,6 +68,9 @@ signal bauds : std_logic_vector(11 downto 0);                  -- Numero de clk 
 signal bits_send : std_logic_vector(3 downto 0);               -- length MENSAJE
 
 signal flag : std_logic;
+
+signal sending : std_logic;
+--signal send : std_logic;
 begin
 
 -- Controlador de procesos
@@ -80,8 +84,8 @@ begin
         state_actual <= state_siguiente;
     end if;
     -- Parte Combinacional 
-    --TX_out <= '0';
-    --TX_ready <= '0';
+    TX_out <= '0';
+    TX_ready <= '0';
     case state_actual is
         when idle => -- Estado de reposo 
             if(flag = '1') then
@@ -99,6 +103,7 @@ begin
                 TX_out <= '0';
                 state_siguiente <= tx_inicio;
            else
+                BIT_PARIDAD <= '0';
                 BAUD_SELEC <= (others => '0');
                 bauds <= (others => '0');
                 DATA <= (others => '0');
@@ -109,42 +114,51 @@ begin
            end if; 
         when tx_inicio => -- Estado de tx_inicio
         BIT_PARIDAD <= DATA(7) xor DATA(6) xor DATA(5) xor DATA(4) xor DATA(3) xor DATA(2) xor DATA(1) xor DATA(0);
-            MENSAJE <= BIT_PARIDAD & DATA(7 downto 0) & '0';
-            bits_send <= "0000";
+            --MENSAJE <= DATA(7 downto 0) & '0';
+            
             TX_ready <= '0'; 
             state_siguiente <= tx_datos;
         when tx_datos => -- Estado de envio de datos
-            if(SENAL_MUESTREO = '1') then
-                if(bits_send = "1010") then
-                    bits_send <= (others => '0');
-                    TSR <= '1';
+                if(sending = '0') then
                     state_siguiente <= idle;
                 else
-                    TSR <= MENSAJE(0);
-                    MENSAJE <= MENSAJE(0) & MENSAJE(9 downto 1);
-                    bits_send <= bits_send + '1';
                     state_siguiente <= tx_datos;
                 end if;
                 TX_out <= TSR;
-            end if;
         when others => state_siguiente <= idle;
     end case;
 end process;
 
-process(clk,a_reset,BAUD_SELEC)
-begin    
+process(clk,a_reset)
+begin
     if(clk'event AND clk = '1') then    
         if(state_actual = tx_inicio OR state_actual = tx_datos) then
+            if(state_actual = tx_inicio) then
+                shifter <= BIT_PARIDAD & DATA(7 downto 0) & '0';
+            end if;
+            
             if(count = bauds) then
                 count <= (others => '0');
                 aux_count <= (others => '0');
                 SENAL_MUESTREO <= '1';
+                if(bits_send = "1010") then
+                    bits_send <= (others => '0');
+                    TSR <= shifter(0);
+                    sending <= '0';
+                else
+                    TSR <= shifter(0);
+                    shifter <= shifter(0) & shifter(9 downto 1);
+                    bits_send <= bits_send + '1';
+                    sending <= '1';
+                end if;
             else
                 aux_count <= aux_count + '1';
                 SENAL_MUESTREO <= '0';
                 count <= aux_count;
             end if;
         else
+            shifter <= (others => '0');
+            bits_send <= (others => '0');
             count <= (others => '0');
             aux_count <= (others => '0');
             SENAL_MUESTREO <= '0';    
@@ -160,5 +174,16 @@ begin
         flag <= '0';
     end if;
 end process;
+
+                --if(bits_send = "1010") then
+                 --   bits_send <= (others => '0');
+                 --   TSR <= '1';
+                --    state_siguiente <= idle;
+               -- else
+                --    TSR <= MENSAJE(0);
+                --    MENSAJE <= MENSAJE(0) & MENSAJE(9 downto 1);
+                --    bits_send <= bits_send + '1';
+                 --   state_siguiente <= tx_datos;
+                --end if;
 
 end Behavioral;
